@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration status="WARN" monitorInterval="30">
     <properties>
-        <property name="LOG_INFO_PATH" value="${sys:user.home}/logs/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log"/>
-        <property name="LOG_WARN_PATH" value="${sys:user.home}/logs/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log"/>
-        <property name="LOG_ERROR_PATH" value="${sys:user.home}/logs/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log"/>
-        <property name="LOG_PATTERN" value="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+        <property name="FILE_NAME" value="${sys:user.home}/logs/main.log"/>
+        <property name="FILE_NAME_INFO" value="${sys:user.home}/logs/info.log"/>
+        <property name="FILE_NAME_WARN" value="${sys:user.home}/logs/warn.log"/>
+        <property name="FILE_NAME_ERROR" value="${sys:user.home}/logs/error.log"/>
+
+        <property name="PATTERN_INFO_PATH" value="${sys:user.home}/logs/info-%d{yyyy-MM-dd}-%i.log.gz"/>
+        <property name="PATTERN_WARN_PATH" value="${sys:user.home}/logs/warn-%d{yyyy-MM-dd}-%i.log.gz"/>
+        <property name="PATTERN_ERROR_PATH" value="${sys:user.home}/logs/error-%d{yyyy-MM-dd}-%i.log.gz"/>
+
+        <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1} - %m%n"/>
     </properties>
     <appenders>
         <console name="Console" target="SYSTEM_OUT">
@@ -12,11 +18,11 @@
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
         </console>
 
-        <File name="Filelog" fileName="log/test.log" append="false">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        <File name="Filelog" fileName="${FILE_NAME}" append="false">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
         </File>
 
-        <RollingFile name="RollingFileInfo" fileName="${sys:user.home}/logs/info.log" filePattern="${LOG_INFO_PATH}">
+        <RollingFile name="RollingFileInfo" fileName="${FILE_NAME_INFO}" filePattern="${PATTERN_INFO_PATH}">
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
@@ -24,8 +30,7 @@
                 <SizeBasedTriggeringPolicy size="100 MB"/>
             </Policies>
         </RollingFile>
-
-        <RollingFile name="RollingFileWarn" fileName="${sys:user.home}/logs/warn.log" filePattern="${LOG_WARN_PATH">
+        <RollingFile name="RollingFileWarn" fileName="${FILE_NAME_WARN}" filePattern="${PATTERN_WARN_PATH}">
             <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
@@ -34,7 +39,7 @@
             </Policies>
             <DefaultRolloverStrategy max="20"/>
         </RollingFile>
-        <RollingFile name="RollingFileError" fileName="${sys:user.home}/logs/error.log" filePattern="$LOG_ERROR_PATH">
+        <RollingFile name="RollingFileError" fileName="${FILE_NAME_ERROR}" filePattern="${PATTERN_ERROR_PATH}">
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
@@ -44,16 +49,17 @@
         </RollingFile>
     </appenders>
 
-    <loggers>
+    <Loggers>
         <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
         <logger name="org.springframework" level="INFO"></logger>
         <logger name="org.mybatis" level="INFO"></logger>
-        <root level="info">
-            <appender-ref ref="Console"/>
-            <appender-ref ref="Filelog"/>
-            <appender-ref ref="RollingFileInfo"/>
-            <appender-ref ref="RollingFileWarn"/>
-            <appender-ref ref="RollingFileError"/>
-        </root>
-    </loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Filelog"/>
+            <AppenderRef ref="RollingFileInfo"/>
+            <AppenderRef ref="RollingFileWarn"/>
+            <AppenderRef ref="RollingFileError"/>
+        </Root>
+    </Loggers>
+
 </configuration>
