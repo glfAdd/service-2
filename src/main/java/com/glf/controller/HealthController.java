@@ -1,4 +1,4 @@
-package com.glf.controller.animal;
+package com.glf.controller;
 
 import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;

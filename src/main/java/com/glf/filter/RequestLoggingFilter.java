@@ -1,5 +1,6 @@
 package com.glf.filter;
 
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -43,7 +44,7 @@ public class RequestLoggingFilter implements Filter {
             while ((line = reader.readLine()) != null) {
                 jsonBody.append(line);
             }
-            logger.info("Request Method: {}, Request URI: {}, JSON Request Body: {}", httpRequest.getMethod(), httpRequest.getRequestURI(), jsonBody);
+            logger.info("Request Method: {}, Request URI: {}, JSON Request Body: {}.", httpRequest.getMethod(), httpRequest.getRequestURI(), jsonBody);
         } else if ("POST".equalsIgnoreCase(httpRequest.getMethod())) {
             StringBuilder body = new StringBuilder();
             BufferedReader reader = new BufferedReader(new InputStreamReader(httpRequest.getInputStream()));
@@ -51,18 +52,13 @@ public class RequestLoggingFilter implements Filter {
             while ((line = reader.readLine()) != null) {
                 body.append(line);
             }
-            // 打印表单参数
             logger.info("Form Parameters: {}", body);
         }
-
-        //        logger.info("Request Method: {}, Request URI: {}, Request ", httpRequest.getMethod());
-        //        logger.info("Request Method: {}", httpRequest.getMethod());
-        //        logger.info("Request URI: {}", httpRequest.getRequestURI());
-        Enumeration<String> headerNames = httpRequest.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String headerName = headerNames.nextElement();
-            logger.info("{}: {}", headerName, httpRequest.getHeader(headerName));
-        }
+//        Enumeration<String> headerNames = httpRequest.getHeaderNames();
+//        while (headerNames.hasMoreElements()) {
+//            String headerName = headerNames.nextElement();
+//            logger.info("{}: {}", headerName, httpRequest.getHeader(headerName));
+//        }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }
