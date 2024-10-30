@@ -20,6 +20,11 @@ import java.util.UUID;
 @Component
 public class RequestLoggingFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(RequestLoggingFilter.class);
+    private final Gson gson;
+
+    public RequestLoggingFilter(Gson gson) {
+        this.gson = gson;
+    }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -37,22 +42,11 @@ public class RequestLoggingFilter implements Filter {
         httpRequest.setAttribute("X-RequestId", requestId);
         httpResponse.setHeader("X-RequestId", requestId);
         if ("POST".equalsIgnoreCase(httpRequest.getMethod()) && "application/json".equals(httpRequest.getContentType())) {
-            // 读取 JSON 请求体
-            StringBuilder jsonBody = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(httpRequest.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                jsonBody.append(line);
-            }
-            logger.info("Request Method: {}, Request URI: {}, JSON Request Body: {}.", httpRequest.getMethod(), httpRequest.getRequestURI(), jsonBody);
-        } else if ("POST".equalsIgnoreCase(httpRequest.getMethod())) {
-            StringBuilder body = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(httpRequest.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                body.append(line);
-            }
-            logger.info("Form Parameters: {}", body);
+            InputStreamReader isr = new InputStreamReader(httpRequest.getInputStream());
+            Object json = gson.fromJson(isr, Object.class);
+            logger.info("RequestId: {}, RequestMethod: {}, RequestURI: {}, JSONRequestBody: {}", requestId, httpRequest.getMethod(), httpRequest.getRequestURI(), gson.toJson(json));
+        } else {
+            logger.info("RequestId: {}, RequestMethod: {}, RequestURI: {}", requestId, httpRequest.getMethod(), httpRequest.getRequestURI());
         }
 //        Enumeration<String> headerNames = httpRequest.getHeaderNames();
 //        while (headerNames.hasMoreElements()) {
