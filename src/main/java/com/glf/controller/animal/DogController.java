@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class DogController {
 
     @GetMapping("get")
-    public void getDog(){
-
+    public void getDog() {
     }
 }
