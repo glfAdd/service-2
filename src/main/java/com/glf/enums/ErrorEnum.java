@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public enum ErrorEnum {
     SUCCESS(0, "成功"),
-    FAIL(1, "成功");
+    FAIL(1, "失败");
 
     private final Integer errorCode;
     private final String errorMsg;
