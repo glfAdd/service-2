@@ -24,17 +24,17 @@ public class GlobalExceptionHandler {
         for (FieldError error : ex.getFieldErrors()) {
             errors.put(error.getField(), error.getDefaultMessage());
         }
-        BaseResponse<Map<String, String>> res = new BaseResponse<>(ErrorEnum.FAIL.getErrorCode(), ErrorEnum.FAIL.getErrorMsg(),
-                errors);
+        BaseResponse<Map<String, String>> res = new BaseResponse<>(ErrorEnum.VALID_ERROR.getErrorCode(),
+                ErrorEnum.VALID_ERROR.getErrorMsg(), errors);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-//        Map<String, String> errors = new HashMap<>();
-//        ex.getBindingResult().getFieldErrors().forEach(error -> {
-//            errors.put(error.getField(), error.getDefaultMessage());
-//        });
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-//    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error -> {
+            errors.put(error.getField(), error.getDefaultMessage());
+        });
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
 }

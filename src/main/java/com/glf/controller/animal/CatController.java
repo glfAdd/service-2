@@ -1,12 +1,12 @@
 package com.glf.controller.animal;
 
+import com.glf.dto.BaseResponse;
 import com.glf.dto.animal.cat.ReqCatListDTO;
 import com.glf.dto.animal.cat.ResCatListDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +20,6 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("cat")
 @Api(tags = "Cat")
-@Validated
 public class CatController {
     @ApiImplicitParam(name = "name", value = "姓名", required = true)
     @ApiOperation(value = "向客人问好")
@@ -31,8 +30,8 @@ public class CatController {
 
     @GetMapping("getCatList")
     @ApiOperation(value = "获取 - cat 列表")
-    public ResCatListDTO getCatList(ReqCatListDTO reqCatListDTO) {
+    public BaseResponse<ResCatListDTO> getCatList(@Valid ReqCatListDTO reqCatListDTO) {
         ResCatListDTO res = new ResCatListDTO();
-        return res;
+        return BaseResponse.success(res);
     }
 }

@@ -2,13 +2,16 @@ package com.glf.enums;
 
 import lombok.Getter;
 
+import javax.validation.Valid;
+
 /**
  * @author glfadd
  */
 @Getter
 public enum ErrorEnum {
     SUCCESS(0, "成功"),
-    FAIL(1, "失败");
+    FAIL(1, "失败"),
+    VALID_ERROR(10000, "参数验证失败");
 
     private final Integer errorCode;
     private final String errorMsg;

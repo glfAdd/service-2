@@ -39,7 +39,8 @@ public class RequestResponseLoggingFilter implements Filter {
         if ("POST".equalsIgnoreCase(request.getMethod()) && "application/json".equals(request.getContentType())) {
             InputStreamReader isr = new InputStreamReader(request.getInputStream());
             Object j = new Gson().fromJson(isr, Object.class);
-            logger.info("RequestId: {}, RequestMethod: {}, RequestURI: {}, JSONRequestBody: {}", requestId, request.getMethod(), request.getRequestURI(), new Gson().toJson(j));
+            logger.info("RequestId: {}, RequestMethod: {}, RequestURI: {}, JSONRequestBody: {}", requestId, request.getMethod(),
+                    request.getRequestURI(), new Gson().toJson(j));
         } else {
             logger.info("RequestId: {}, RequestMethod: {}, RequestURI: {}", requestId, request.getMethod(), request.getRequestURI());
         }
