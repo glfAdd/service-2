@@ -2,8 +2,6 @@ package com.glf.enums;
 
 import lombok.Getter;
 
-import javax.validation.Valid;
-
 /**
  * @author glfadd
  */

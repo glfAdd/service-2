@@ -20,6 +20,7 @@
         <knife.version>4.5.0</knife.version>
         <junit.version>3.8.1</junit.version>
         <gson.version>2.11.0</gson.version>
+        <mybatis-plus.version>3.5.1</mybatis-plus.version>
     </properties>
 
     <!-- 依赖管理 -->
@@ -92,6 +93,22 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <!--mysql-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.20</version>
         </dependency>
     </dependencies>
     <build>
