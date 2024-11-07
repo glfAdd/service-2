@@ -10,6 +10,6 @@ import com.baomidou.dynamic.datasource.annotation.DS;
  * @author glfadd
  */
 @Mapper
-@DS("datasource1")
+@DS("db1")
 public interface UserInfoMapper extends BaseMapper<UserInfo> {
 }

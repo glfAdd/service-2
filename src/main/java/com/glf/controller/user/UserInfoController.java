@@ -22,8 +22,7 @@ public class UserInfoController {
 
     @GetMapping("info")
     public String getUserInfo() {
-//        UserInfo a = userInfoMapper.selectList(null).get(0);
-//        return a.toString();
-        return "123";
+        UserInfo a = userInfoMapper.selectList(null).get(0);
+        return a.toString();
     }
 }
