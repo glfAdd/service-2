@@ -21,6 +21,8 @@
         <junit.version>3.8.1</junit.version>
         <gson.version>2.11.0</gson.version>
         <mybatis-plus.version>3.5.1</mybatis-plus.version>
+        <dynamic.version>3.5.1</dynamic.version>
+        <mysql-connector.version>8.0.20</mysql-connector.version>
     </properties>
 
     <!-- 依赖管理 -->
@@ -104,12 +106,12 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-            <version>3.5.1</version>
+            <version>${dynamic.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.20</version>
+            <version>${mysql-connector.version}</version>
         </dependency>
     </dependencies>
     <build>
