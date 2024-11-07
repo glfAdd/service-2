@@ -2,6 +2,7 @@ package com.glf.config;
 
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,6 +37,11 @@ public class DataSourceDB1Config {
     @Bean(name = "db1SqlSessionFactory")
     @Primary
     public SqlSessionFactory defSqlSessionFactory(@Qualifier("db1DataSource") DataSource dataSource) throws Exception {
+//        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+//        bean.setDataSource(dataSource);
+//        bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/db1/*xml"));
+//        return bean.getObject();
+
         MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         // 设置 mybatis 的xml所在位置
