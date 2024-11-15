@@ -19,18 +19,18 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("cat")
-@Api(tags = "Cat")
+@Api(tags = "接收请求解析")
 public class CatController {
     @ApiImplicitParam(name = "name", value = "姓名", required = true)
-    @ApiOperation(value = "向客人问好")
-    @GetMapping("/sayHi")
-    public ResponseEntity<String> sayHi(@RequestParam(value = "name") String name) {
+    @ApiOperation(value = "关键字参数")
+    @GetMapping("/request1")
+    public ResponseEntity<String> request1(@RequestParam(value = "name") String name) {
         return ResponseEntity.ok("Hi:" + name);
     }
 
-    @GetMapping("getCatList")
-    @ApiOperation(value = "获取 - cat 列表")
-    public BaseResponse<ResCatListDTO> getCatList(@Valid ReqCatListDTO reqCatListDTO) {
+    @GetMapping("request2")
+    @ApiOperation(value = "关键字参数-对象解析")
+    public BaseResponse<ResCatListDTO> request2(@Valid ReqCatListDTO reqCatListDTO) {
         ResCatListDTO res = new ResCatListDTO();
         return BaseResponse.success(res);
     }

@@ -10,8 +10,8 @@ import java.io.PrintWriter;
  * @author glfadd
  */
 public class CustomResponseWrapper extends HttpServletResponseWrapper {
-    private CharArrayWriter charArrayWriter = new CharArrayWriter();
-    private PrintWriter writer = new PrintWriter(charArrayWriter);
+    private final CharArrayWriter charArrayWriter = new CharArrayWriter();
+    private final PrintWriter writer = new PrintWriter(charArrayWriter);
 
     public CustomResponseWrapper(HttpServletResponse response) {
         super(response);

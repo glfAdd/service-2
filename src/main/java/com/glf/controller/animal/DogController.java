@@ -5,9 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author glfadd
+ */
 @RestController
 @RequestMapping("dog")
-@Api(tags = "Dog")
+@Api(tags = "请求参数校验")
 public class DogController {
 
     @GetMapping("get")

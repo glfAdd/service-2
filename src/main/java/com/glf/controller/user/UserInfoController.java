@@ -21,9 +21,15 @@ import javax.annotation.Resource;
 @Api(tags = "用户信息")
 public class UserInfoController {
 
+    /**
+     * Feign 发送 http 请求
+     */
     @Resource
     private UserClient userClient;
 
+    /**
+     * RestTemplate 发送 http 请求
+     */
     @Resource
     private RestTemplate restTemplate;
 
