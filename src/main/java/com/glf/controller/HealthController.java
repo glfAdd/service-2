@@ -16,7 +16,7 @@ public class HealthController {
         return ResponseEntity.ok("health");
     }
 
-    @GetMapping("health-str")
+    @GetMapping("/health-str")
     public String healthStr() {
         return "health-str";
     }
