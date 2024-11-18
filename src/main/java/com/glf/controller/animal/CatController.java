@@ -1,8 +1,8 @@
 package com.glf.controller.animal;
 
 import com.glf.dto.BaseResponse;
-import com.glf.dto.animal.cat.ReqCatListDTO;
-import com.glf.dto.animal.cat.ResCatListDTO;
+import com.glf.dto.animal.cat.ReqCat2DTO;
+import com.glf.dto.animal.cat.ResCat2DTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -30,8 +30,8 @@ public class CatController {
 
     @GetMapping("request2")
     @ApiOperation(value = "关键字参数-对象解析")
-    public BaseResponse<ResCatListDTO> request2(@Valid ReqCatListDTO reqCatListDTO) {
-        ResCatListDTO res = new ResCatListDTO();
+    public BaseResponse<ResCat2DTO> request2(@Valid ReqCat2DTO reqCatListDTO) {
+        ResCat2DTO res = new ResCat2DTO();
         return BaseResponse.success(res);
     }
 }

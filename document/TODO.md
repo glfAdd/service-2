@@ -12,6 +12,7 @@
 - [ ] jwt
 - [ ] Feign 多个配置
 - [ ] RestTemplate 多个配置
+- [ ] swagger 请求参数
 - [ ] 
 
 

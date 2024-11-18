@@ -1,9 +1,12 @@
-package com.glf.dto.animal.dog;
+package com.glf.dto.animal.cat;
 
 import lombok.Data;
 
+/**
+ * @author glfadd
+ */
 @Data
-public class DogDTO {
+public class ResCat1DTO {
     private String name;
     private Integer age;
     private String gender;
