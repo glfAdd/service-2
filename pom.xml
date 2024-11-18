@@ -23,6 +23,7 @@
         <mybatis-plus.version>3.5.1</mybatis-plus.version>
         <dynamic.version>3.5.1</dynamic.version>
         <mysql-connector.version>8.0.20</mysql-connector.version>
+        <springfox-swagger-ui.version>2.10.5</springfox-swagger-ui.version>
     </properties>
 
     <!-- 依赖管理 -->
@@ -80,6 +81,11 @@
             <scope>provided</scope>
         </dependency>
         <!--文档-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-swagger-ui.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
