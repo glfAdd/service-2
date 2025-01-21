@@ -1,5 +1,7 @@
 package com.glf.controller.animal;
 
+import com.glf.dto.animal.cat.ReqCat2DTO;
+import com.glf.dto.animal.cat.ResCat2DTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
 /**
@@ -54,11 +57,21 @@ public class CatController {
         return ResponseEntity.ok("123");
     }
 
+    @ApiOperation(value = "url 参数 (对象解析)")
+    @GetMapping("request5")
+    public ResponseEntity<String> request5(@Validated ReqCat2DTO reqCat2DTO) {
+        ResCat2DTO res = new ResCat2DTO();
+        return ResponseEntity.ok("123");
+    }
+
     // 正则表达式参数
-//    @ApiOperation(value = "url 参数 (对象解析)")
-//    @GetMapping("request3")
-//    public BaseResponse<ResCat2DTO> request3(@Valid ReqCat2DTO reqCatListDTO) {
-//        ResCat2DTO res = new ResCat2DTO();
-//        return BaseResponse.success(res);
+
+    // @PathVariable用于路径参数
+    // @RequestHeader 解析请求头中的参数
+
+
+//    @GetMapping("/api/byGetQueryString")
+//    public String byGetQueryString(HttpServletRequest request) {
+//        return request.getQueryString();
 //    }
 }
