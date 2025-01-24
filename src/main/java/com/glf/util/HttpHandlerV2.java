@@ -4,7 +4,6 @@ import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.websocket.SendResult;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,10 +18,10 @@ import java.util.concurrent.TimeUnit;
 public class HttpHandlerV2 {
     private static final Logger log = LoggerFactory.getLogger(HttpHandlerV2.class);
 
-    private int timeout;
+    private final int timeout;
 
     public HttpHandlerV2() {
-        this.timeout = 10 / 3;
+        this.timeout = 60 / 3;
 
     }
 
@@ -31,6 +30,16 @@ public class HttpHandlerV2 {
     }
 
 
+    /**
+     * 发送请求
+     *
+     * @param method  请求方式 (get ,post)
+     * @param url     地址
+     * @param params  参数
+     * @param body    请求体
+     * @param headers header
+     * @return 响应对象
+     */
     private Response sendRequest(String method, String url, Map<String, String> params, String body, Map<String, String> headers) {
         // step 1: 创建 client
         OkHttpClient client = new OkHttpClient.Builder()
@@ -66,12 +75,38 @@ public class HttpHandlerV2 {
         Request request = requestBuilder.build();
 
         // step 3: 发送请求
-        try (Response response = client.newCall(request).execute()) {
-            return response;
+        try {
+            return client.newCall(request).execute();
         } catch (Exception e) {
             log.error(e.getMessage());
         }
         return null;
+    }
+
+    /**
+     * 响应解析为文本类型
+     *
+     * @param response 响应
+     * @return 状态码和响应体
+     */
+    private Map<String, Object> formatToText(Response response) {
+        Map<String, Object> res = new HashMap<>();
+        if (response != null) {
+            if (response.isSuccessful()) {
+                res.put("code", response.code());
+                if (response.body() != null) {
+                    try {
+                        res.put("body", response.body().string());
+                    } catch (IOException e) {
+                        log.error(e.getMessage());
+                        res.put("body", "");
+                    }
+                }
+            } else {
+                System.err.println("Request failed with response code: " + response.code());
+            }
+        }
+        return res;
     }
 
 
@@ -85,19 +120,8 @@ public class HttpHandlerV2 {
      * @return 状态码和响应体
      */
     public Map<String, Object> get(String url, Map<String, String> params, Map<String, String> headers, Integer timeout) {
-        Map<String, Object> res = new HashMap<>();
         Response response = sendRequest("get", url, params, null, headers);
-        if (response != null) {
-            if (response.isSuccessful()) {
-                res.put("code", response.code());
-                if (response.body() != null) {
-                    res.put("body", response.body().string());
-                }
-            } else {
-                System.err.println("Request failed with response code: " + response.code());
-            }
-        }
-        return res;
+        return formatToText(response);
     }
 
 
@@ -110,24 +134,9 @@ public class HttpHandlerV2 {
      * @param timeout 请求超时时间
      * @return 状态码和响应体
      */
-    public static Map<String, Object> post(String url, String body, Map<String, String> headers, Integer timeout) {
-        Map<String, Object> res = new HashMap<>();
-        OkHttpClient client = createClient(timeout);
-        Request request = createRequest("post", url, null, body, headers);
-        // 发送请求
-        try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                res.put("code", response.code());
-                if (response.body() != null) {
-                    res.put("body", response.body().string());
-                }
-            } else {
-                System.err.println("Request failed with response code: " + response.code());
-            }
-        } catch (IOException e) {
-            log.error(e.getMessage());
-        }
-        return res;
+    public Map<String, Object> post(String url, String body, Map<String, String> headers, Integer timeout) throws IOException {
+        Response response = sendRequest("post", url, null, body, headers);
+        return formatToText(response);
     }
 
     public void put() {
@@ -155,8 +164,8 @@ public class HttpHandlerV2 {
     }
 
     public static void main(String[] args) {
-        Map<String, Object> a = get("http://localhost:8080/health", null, null, null);
-        String b = a.get("body").toString();
-        System.out.println(b);
+        HttpHandlerV2 h = new HttpHandlerV2(30);
+        Map<String, Object> a = h.get("http://localhost:8080/health", null, null, null);
+        System.out.println(a);
     }
 }
