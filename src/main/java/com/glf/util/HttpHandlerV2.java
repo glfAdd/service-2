@@ -67,10 +67,33 @@ public class HttpHandlerV2 {
             }
             HttpUrl httpUrl = urlBuilder.build();
             requestBuilder.url(httpUrl);
+
         } else if (Objects.equals(method, "post")) {
             // post 请求
+            RequestBody b = RequestBody.create(body, MediaType.get("application/json; charset=utf-8"));
             requestBuilder.url(url);
-            requestBuilder.post(RequestBody.create(body, MediaType.get("application/json; charset=utf-8")));
+            requestBuilder.post(b);
+
+        } else if (Objects.equals(method, "put")) {
+            // put 请求
+            RequestBody b = RequestBody.create(body, MediaType.get("application/json; charset=utf-8"));
+            requestBuilder.url(url);
+            requestBuilder.put(b);
+
+        } else if (Objects.equals(method, "delete")) {
+            // delete 请求
+
+        } else if (Objects.equals(method, "options")) {
+            // options 请求
+
+        } else if (Objects.equals(method, "head")) {
+            // head 请求
+
+        } else if (Objects.equals(method, "connect")) {
+            // connect 请求
+
+        } else if (Objects.equals(method, "trace")) {
+            // trace 请求
         }
         Request request = requestBuilder.build();
 
@@ -139,8 +162,9 @@ public class HttpHandlerV2 {
         return formatToText(response);
     }
 
-    public void put() {
-
+    public Map<String, Object> put(String url, String body, Map<String, String> headers, Integer timeout) throws IOException {
+        Response response = sendRequest("put", url, null, body, headers);
+        return formatToText(response);
     }
 
     public void delete() {
