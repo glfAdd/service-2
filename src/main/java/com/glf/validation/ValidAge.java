@@ -9,9 +9,9 @@ import javax.validation.Payload;
 import java.lang.annotation.*;
 
 /**
- *
  * @author glfadd
- */ // 指定验证逻辑类
+ */
+// 指定验证逻辑类
 @Constraint(validatedBy = AgeValidator.class)
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

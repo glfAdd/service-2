@@ -1,5 +1,6 @@
 package com.glf.controller.animal;
 
+import com.glf.annotation.LogExecutionTime;
 import com.glf.dto.animal.cat.ReqCat2DTO;
 import com.glf.dto.animal.cat.ResCat2DTO;
 import io.swagger.annotations.Api;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
 /**
@@ -25,6 +25,7 @@ import javax.validation.constraints.Min;
 // 启动参数校验
 @Validated
 public class CatController {
+    @LogExecutionTime
     @ApiOperation(value = "url 参数 (不使用 swagger)")
     @GetMapping("/request1")
     public ResponseEntity<String> request1(@RequestParam(value = "name") String name, @RequestParam(value = "age") Integer age) {

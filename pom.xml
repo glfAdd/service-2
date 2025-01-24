@@ -24,6 +24,7 @@
         <dynamic.version>3.5.1</dynamic.version>
         <mysql-connector.version>8.0.20</mysql-connector.version>
         <springfox-swagger-ui.version>2.10.5</springfox-swagger-ui.version>
+        <okhttp.version>4.12.0</okhttp.version>
     </properties>
 
     <!-- 依赖管理 -->
@@ -141,6 +142,17 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <!--用户自定义注释-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!--发送 http 请求-->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
         </dependency>
     </dependencies>
     <build>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/src/main/java/com/glf/annotation" title="自定义注解"/>
+     <tree path="/src/main/java/com/glf/aspect" title="AOP 切面逻辑"/>
+     <tree path="/src/main/java/com/glf/dto" title="数据传输对象"/>
+     <tree path="/src/main/java/com/glf/validation" title="自定义验证"/>
+     <tree path="/src/main/java/com/glf/util" title="工具类"/>
+ </trees>
