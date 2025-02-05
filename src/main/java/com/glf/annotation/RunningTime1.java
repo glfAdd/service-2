@@ -11,6 +11,6 @@ import java.lang.annotation.*;
 // 在运行时可用
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface LogExecution1 {
+public @interface RunningTime1 {
 
 }

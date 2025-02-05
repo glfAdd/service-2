@@ -1,6 +1,6 @@
 package com.glf.aspect;
 
-import com.glf.annotation.LogExecution2;
+import com.glf.annotation.RunningTime2;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class LogExecutionAspect2 {
-    private static final Logger logger = LoggerFactory.getLogger(LogExecutionAspect2.class);
+public class RunningTimeAsp2 {
+    private static final Logger logger = LoggerFactory.getLogger(RunningTimeAsp2.class);
 
     // 这里的 logExe3 是下面的参数
     @Around("@annotation(logExe3)")
-    public Object logExe(ProceedingJoinPoint joinPoint, LogExecution2 logExe3) throws Throwable {
+    public Object logExe(ProceedingJoinPoint joinPoint, RunningTime2 logExe3) throws Throwable {
         // 获取注解中的 logLevel 和 message 参数
         String logLevel = logExe3.logLevel();
         String message = logExe3.message();

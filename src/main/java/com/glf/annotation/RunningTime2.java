@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface LogExecution2 {
+public @interface RunningTime2 {
     // 日志级别，默认是 INFO
     String logLevel() default "INFO";
 

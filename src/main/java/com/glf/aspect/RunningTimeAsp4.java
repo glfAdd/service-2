@@ -6,10 +6,9 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Component;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * @author glfadd
@@ -18,20 +17,20 @@ import org.slf4j.LoggerFactory;
 @Aspect
 @Component
 @Slf4j
-public class LogExecutionAspect4 {
-    private static final Logger logger = LoggerFactory.getLogger(LogExecutionAspect4.class);
+public class RunningTimeAsp4 {
+    private static final Logger logger = LoggerFactory.getLogger(RunningTimeAsp4.class);
 
     @Pointcut("execution(public * com.glf.controller.*.*.*(..))")
     // @Pointcut("execution(public * com.glf.controller.animal.CatController.*(..))")
-    public void method2() {
+    public void logExe() {
     }
 
-    @Before("method2()")
+    @Before("logExe()")
     public void before2(JoinPoint joinPoint) {
         logger.info("before2 {}", joinPoint.getSignature().getName());
     }
 
-    @After("method2()")
+    @After("logExe()")
     public void after2(JoinPoint joinPoint) {
         logger.info("after2 {}", joinPoint.getSignature().getName());
     }

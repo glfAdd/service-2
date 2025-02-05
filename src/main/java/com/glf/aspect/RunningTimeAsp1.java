@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 @Slf4j
-public class LogExecutionAspect1 {
+public class RunningTimeAsp1 {
 
-    @Around("@annotation(com.glf.annotation.LogExecution1)")
+    @Around("@annotation(com.glf.annotation.RunningTime1)")
     public Object logExe(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
         // 执行目标方法

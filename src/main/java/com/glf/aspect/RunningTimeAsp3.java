@@ -7,12 +7,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author glfadd
+ */
 @Aspect
 @Component
-public class LogExecutionAspect3 {
-    private static final Logger logger = LoggerFactory.getLogger(LogExecutionAspect3.class);
+public class RunningTimeAsp3 {
+    private static final Logger logger = LoggerFactory.getLogger(RunningTimeAsp3.class);
 
-    @Pointcut("@annotation(com.glf.annotation.LogExecution3)")
+    @Pointcut("@annotation(com.glf.annotation.RunningTime3)")
     public void logPointCut6() {
     }
 
