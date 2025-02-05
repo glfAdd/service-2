@@ -8,19 +8,21 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author glfadd
+ * 无参数, 方式 1
  */
 @Aspect
 @Component
 @Slf4j
-public class LogExecutionTimeAspect {
+public class LogExecutionAspect1 {
 
-    @Around("@annotation(com.glf.annotation.LogExecutionTime)")
-    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("@annotation(com.glf.annotation.LogExecution1)")
+    public Object logExe(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
         // 执行目标方法
         Object result = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
-        log.info("{} executed in {}ms", joinPoint.getSignature(), executionTime);
+        log.info("{} 执行时间 {}ms", joinPoint.getSignature(), executionTime);
         return result;
     }
+
 }

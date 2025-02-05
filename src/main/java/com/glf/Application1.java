@@ -10,7 +10,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @SpringBootApplication
 @EnableFeignClients
-// @EnableAspectJAutoProxy
+@EnableAspectJAutoProxy
 public class Application1 {
     public static void main(String[] args) {
         SpringApplication.run(Application1.class, args);

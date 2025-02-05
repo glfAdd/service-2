@@ -1,6 +1,7 @@
 package com.glf.controller.animal;
 
-import com.glf.annotation.LogExecutionTime;
+import com.glf.annotation.LogExecution2;
+import com.glf.annotation.LogExecution1;
 import com.glf.dto.animal.cat.ReqCat2DTO;
 import com.glf.dto.animal.cat.ResCat2DTO;
 import io.swagger.annotations.Api;
@@ -25,13 +26,14 @@ import javax.validation.constraints.Min;
 // 启动参数校验
 @Validated
 public class CatController {
-    @LogExecutionTime
+    @LogExecution1
     @ApiOperation(value = "url 参数 (不使用 swagger)")
     @GetMapping("/request1")
     public ResponseEntity<String> request1(@RequestParam(value = "name") String name, @RequestParam(value = "age") Integer age) {
         return ResponseEntity.ok(String.format("%s - %s", name, age));
     }
 
+    @LogExecution2(logLevel = "DEBUG", message = "查询接口2")
     @ApiOperation(value = "url 参数 (使用 swagger)")
     @GetMapping("/request2")
     public ResponseEntity<String> request2(
