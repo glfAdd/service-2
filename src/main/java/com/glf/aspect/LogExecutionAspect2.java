@@ -18,7 +18,7 @@ public class LogExecutionAspect2 {
 
     // 这里的 logExe3 是下面的参数
     @Around("@annotation(logExe3)")
-    public Object logExecutionTime(ProceedingJoinPoint joinPoint, LogExecution2 logExe3) throws Throwable {
+    public Object logExe(ProceedingJoinPoint joinPoint, LogExecution2 logExe3) throws Throwable {
         // 获取注解中的 logLevel 和 message 参数
         String logLevel = logExe3.logLevel();
         String message = logExe3.message();

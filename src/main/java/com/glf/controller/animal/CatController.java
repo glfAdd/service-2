@@ -2,6 +2,7 @@ package com.glf.controller.animal;
 
 import com.glf.annotation.LogExecution2;
 import com.glf.annotation.LogExecution1;
+import com.glf.annotation.LogExecution3;
 import com.glf.dto.animal.cat.ReqCat2DTO;
 import com.glf.dto.animal.cat.ResCat2DTO;
 import io.swagger.annotations.Api;
@@ -42,6 +43,7 @@ public class CatController {
         return ResponseEntity.ok(String.format("%s - %s", name, age));
     }
 
+    @LogExecution3
     @ApiOperation(value = "url 参数 (使用 swagger 结合 Valid)")
     @GetMapping("/request3")
     public ResponseEntity<String> request3(
