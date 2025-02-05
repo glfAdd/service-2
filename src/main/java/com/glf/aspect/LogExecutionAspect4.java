@@ -18,28 +18,11 @@ import org.slf4j.LoggerFactory;
 @Aspect
 @Component
 @Slf4j
-public class LogExecutionAspect7 {
-    private static final Logger logger = LoggerFactory.getLogger(LogExecutionAspect7.class);
+public class LogExecutionAspect4 {
+    private static final Logger logger = LoggerFactory.getLogger(LogExecutionAspect4.class);
 
-    @Pointcut("@annotation(com.glf.annotation.LogExecution1)")
-    public void method1() {
-    }
-
-
-    @Before("method1()")
-    public void before1(JoinPoint joinPoint) {
-        logger.info("before1 {}", joinPoint.getSignature().getName());
-    }
-
-    @After("method1()")
-    public void after1(JoinPoint joinPoint) {
-        logger.info("after1 {}", joinPoint.getSignature().getName());
-    }
-
-    /**
-     * service 目录下的方法都嗲用这个
-     */
-    @Pointcut("execution(public * com.glf.controller..*(*))")
+    @Pointcut("execution(public * com.glf.controller.*.*.*(..))")
+    // @Pointcut("execution(public * com.glf.controller.animal.CatController.*(..))")
     public void method2() {
     }
 
