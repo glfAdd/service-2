@@ -55,7 +55,7 @@ public class CatController {
     @ApiOperation(value = "url 参数 (数组传参)")
     @GetMapping("/request4")
     public ResponseEntity<String> request4(
-            @ApiParam(name = "age", value = "年龄", required = true, example = "22,23") @RequestParam(name = "age", required = false) Integer[] age) {
+            @ApiParam(name = "age", value = "年龄", required = true, example = "23") @RequestParam(name = "age", required = false) Integer[] age) {
         for (Integer integer : age) {
             System.out.println(integer);
         }

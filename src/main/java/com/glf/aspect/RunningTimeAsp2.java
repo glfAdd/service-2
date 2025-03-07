@@ -40,7 +40,7 @@ public class RunningTimeAsp2 {
                 break;
             case "INFO":
             default:
-                logger.info("{} {} 执行时间 {}ms", joinPoint.getSignature(), message, executionTime);
+                logger.info("{} {} 执行时间 {}ms !!!", joinPoint.getSignature(), message, executionTime);
                 break;
         }
         return proceed;
